@@ -17,12 +17,22 @@ export const app = Express();
 
 config({ path: "./config/config.env"});
 
+const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    "http://localhost:5173"
+  ];
 
 app.use(cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-}))
+    credentials: true
+  }));
 
 app.use(cookieParser());
 app.use(Express.json());
