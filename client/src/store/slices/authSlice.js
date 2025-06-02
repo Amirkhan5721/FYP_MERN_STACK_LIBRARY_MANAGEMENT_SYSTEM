@@ -137,7 +137,7 @@ const authSlice = createSlice({
     }
 });
 
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.BACKEND_VERCEL_URL;
 
 export const resetAuthSlice = () => (dispatch) => {
     dispatch(authSlice.actions.resetAuthSlice());
