@@ -138,6 +138,7 @@ const authSlice = createSlice({
 });
 
 const API = import.meta.env.VITE_API_URL;
+
 export const resetAuthSlice = () => (dispatch) => {
     dispatch(authSlice.actions.resetAuthSlice());
 }
@@ -205,7 +206,6 @@ export const getUser = () => async (dispatch) => {
     dispatch(authSlice.actions.getUserRequest());
     await axios
         .get(`${API}/api/v1/auth/me`, {
-
             withCredentials: true,
         }).then(res => {
             dispatch(authSlice.actions.getUserSuccess(res.data));
